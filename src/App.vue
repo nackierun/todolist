@@ -1,16 +1,42 @@
 <template>
   <div id="app">
-    <HelloWorld msg=""/>
+    <ToDos v-bind:ToDos="todos" v-on:del-todo="deleteToDo" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ToDos from './components/ToDos';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    ToDos
+  },
+  data(){
+    return {
+      todos:[
+        {
+          id:1,
+          title:"ToDo One",
+          completed: false
+        },
+        {
+          id:2,
+          title:"ToDo Two",
+          completed: false
+        },
+        {
+          id:3,
+          title:"ToDo Three",
+          completed: false
+        },
+      ]
+    }
+  },
+  methods:{
+    deleteToDo(id){
+      this.todos = this.todos.filter(ToDos => ToDos.id !== id);
+    }
   }
 }
 </script>
@@ -20,7 +46,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
